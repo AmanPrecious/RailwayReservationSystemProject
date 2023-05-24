@@ -5,6 +5,11 @@ ruby "3.0.0"
 
 gem "devise" 
 
+#active admin add
+gem 'activeadmin'
+
+
+
 #add a bootstrap
 gem 'bootstrap', '~> 5.1.3'
 
