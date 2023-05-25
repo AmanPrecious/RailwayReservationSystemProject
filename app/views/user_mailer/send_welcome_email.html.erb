@@ -1,0 +1,12 @@
+<center>
+<h1>Welcome to Railway Reservation System, <%= @user.first_name %></h1>
+<p>
+  You have successfully signed up to railwayreservationsystem.com,
+  your username is: <%= @user.email%>.<br>
+</p>
+<p>
+
+  To login to the site, just follow this link:<%= link_to " Sign_in here", new_user_session_url %>.
+</p>
+<p>Thanks for joining and have a great day!</p>
+</center>

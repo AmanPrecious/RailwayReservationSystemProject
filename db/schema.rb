@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_24_125914) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_25_135559) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -56,6 +56,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_24_125914) do
     t.index ["user_id"], name: "index_passengers_on_user_id"
   end
 
+  create_table "seats", force: :cascade do |t|
+    t.string "class_type"
+    t.string "seat_type"
+    t.integer "seat_quantity"
+    t.string "seat_status"
+    t.integer "train_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["train_id"], name: "index_seats_on_train_id"
+  end
+
   create_table "stations", force: :cascade do |t|
     t.string "stn_name"
     t.string "stn_location"
@@ -90,6 +101,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_24_125914) do
     t.integer "mobile"
     t.string "address"
     t.datetime "remember_created_at"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -99,4 +114,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_24_125914) do
   add_foreign_key "join_train_stations", "stations"
   add_foreign_key "join_train_stations", "trains"
   add_foreign_key "passengers", "users"
+  add_foreign_key "seats", "trains"
 end

@@ -22,12 +22,12 @@ ActiveAdmin.register Train do
       f.input :source_station, as: :select, collection: Station.pluck(:stn_name)
       f.input :destination_station, as: :select, collection: Station.pluck(:stn_name)
       if f.object.arrival_time.present?
-       f.input :arrival_time, as: :string, input_html: {value: f.object.arrival_time.strftime("%I:%M %p"), readonly: true }
+       f.input :arrival_time, as: :string, input_html: {value: f.object.arrival_time.strftime("%I:%M %p")}
       else
        f.input :arrival_time, as: :string,input_html: { placeholder: 'HH:MM' }
       end
       if f.object.departure_time.present?
-        f.input :departure_time, as: :string, input_html: {value: f.object.departure_time.strftime("%I:%M %p"), readonly: true }
+        f.input :departure_time, as: :string, input_html: {value: f.object.departure_time.strftime("%I:%M %p") }
        else
         f.input :departure_time, as: :string,input_html: { placeholder: 'HH:MM' }
        end
@@ -46,7 +46,9 @@ ActiveAdmin.register Train do
     column :arrival_time do |object|
       object.arrival_time.strftime("%H:%M %P")
     end
-    column :departure_time
+    column :departure_time do |object|
+      object.departure_time.strftime("%H:%M %P")
+    end
     actions
   end
 

@@ -13,6 +13,8 @@ gem 'activeadmin'
 #add a bootstrap
 gem 'bootstrap', '~> 5.1.3'
 
+gem 'jquery-rails'
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4", ">= 7.0.4.3"
 
@@ -80,3 +82,6 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem "letter_opener", group: :development
+gem "byebug"
