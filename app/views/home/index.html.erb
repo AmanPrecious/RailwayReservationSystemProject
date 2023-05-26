@@ -37,7 +37,8 @@
       <td><%= result.train_name %></td>
       <td><%= result.source_station %></td>
       <td><%= result.destination_station%></td>
-      <td><button type=”button” class=”btn btn-primary”> Book Now </button></td>
+      <td><%= button_to "Back to Home", _path ,:method => :get,class: "btn btn-primary" %>
+      </td>
     </tr>
     <% end %> 
   </tbody>
