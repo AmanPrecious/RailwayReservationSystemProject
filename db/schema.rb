@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_25_135559) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_26_123711) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -60,7 +60,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_135559) do
     t.string "class_type"
     t.string "seat_type"
     t.integer "seat_quantity"
-    t.string "seat_status"
     t.integer "train_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -73,6 +72,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_135559) do
     t.string "stn_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "tickets", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "train_id", null: false
+    t.string "booking_status"
+    t.date "booking_date"
+    t.string "from_station"
+    t.string "to_station"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["train_id"], name: "index_tickets_on_train_id"
+    t.index ["user_id"], name: "index_tickets_on_user_id"
   end
 
   create_table "train_stations", force: :cascade do |t|
@@ -115,4 +127,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_135559) do
   add_foreign_key "join_train_stations", "trains"
   add_foreign_key "passengers", "users"
   add_foreign_key "seats", "trains"
+  add_foreign_key "tickets", "trains"
+  add_foreign_key "tickets", "users"
 end

@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  train: one
+  booking_status: MyString
+  booking_date: 2023-05-26
+  from_station: MyString
+  to_station: MyString
+
+two:
+  user: two
+  train: two
+  booking_status: MyString
+  booking_date: 2023-05-26
+  from_station: MyString
+  to_station: MyString

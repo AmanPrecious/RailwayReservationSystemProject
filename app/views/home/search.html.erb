@@ -13,16 +13,30 @@
       <th scope="col">Booking</th>
     </tr>
   </thead>
+
   <tbody>
   <% @results.each do |result| %>
-    <tr>
+    
+    <tr class="border row-margin-05" >
       <td><%= result.train_number %></td>
       <td><%= result.train_name %></td>
       <td><%= result.source_station %></td>
-      <td><%= result.destination_station%></td>
-      <td><button type=”button” class=”btn btn-primary”> Book Now </button></td>
+      <td><%= result.destination_station%></td>  
+     <td> <%= button_to "New ticket", new_ticket_path ,:method => :get,class: "btn btn-primary" %></td>
     </tr>
+    <tr >
+    <td> <button>Sleeper(SL) = <%= Train.find_by(train_number:"#{result.train_number}").seats.where(class_type:"SL").sum(:seat_quantity)%> </button></td>
+    <td> <button>AC = <%= Train.find_by(train_number:"#{result.train_number}").seats.where(class_type:"AC").sum(:seat_quantity)%>  </button></td>
+    
+    </tr>
+    
     <% end %> 
+    <br>
   </tbody>
+
 </table>
 </center>
+<div>
+<%= button_to "Back to Home", root_path ,:method => :get,class: "btn btn-primary" %>
+
+</div>

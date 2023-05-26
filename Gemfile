@@ -85,3 +85,4 @@ end
 
 gem "letter_opener", group: :development
 gem "byebug"
+gem 'cancancan'

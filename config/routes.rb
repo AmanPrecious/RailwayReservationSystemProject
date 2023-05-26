@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'trains/show'
+  resources :tickets
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users
