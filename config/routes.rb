@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :trains
+  resources :passengers
   get 'trains/show'
   resources :tickets
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -11,4 +13,5 @@ Rails.application.routes.draw do
   # root "articles#index"
   root to: "home#index" 
   get '/search', to: "home#search"
+  
 end

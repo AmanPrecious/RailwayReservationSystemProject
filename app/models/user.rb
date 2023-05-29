@@ -6,6 +6,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
   
+  has_many :tickets
+  has_many :passengers,through: :tickets
+ 
   after_create :send_email,:send_email_admin
          
   def send_email  
@@ -15,5 +18,7 @@ class User < ApplicationRecord
   def send_email_admin
     AdminMailer.new_registration_mail(self).deliver_now
   end
+
+ 
 
 end

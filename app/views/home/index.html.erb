@@ -31,14 +31,14 @@
     </tr>
   </thead>
   <tbody>
-  <% @results.each do |result| %>
+  <% @results.each do |train| %>
     <tr>
-      <td><%= result.train_number %></td>
-      <td><%= result.train_name %></td>
-      <td><%= result.source_station %></td>
-      <td><%= result.destination_station%></td>
-      <td><%= button_to "Back to Home", _path ,:method => :get,class: "btn btn-primary" %>
-      </td>
+      <td><%= train.train_number %></td>
+      <td><%= train.train_name %></td>
+      <td><%= train.source_station %></td>
+      <td><%= train.destination_station%></td>
+      <td><%= button_to "Book Now", train ,:method => :get,class: "btn btn-primary" %>
+      </td> 
     </tr>
     <% end %> 
   </tbody>

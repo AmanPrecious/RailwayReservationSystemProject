@@ -1,6 +1,3 @@
-<center>
-<h1>Trains Seat Availability Status</h1>
-
 
 <table class="table">
   <thead>
@@ -10,34 +7,24 @@
       <th scope="col">Train Name</th>
       <th scope="col">Source Station</th>
       <th scope="col">Destination Station</th>
-      <th scope="col">Booking</th>
     </tr>
   </thead>
 
   <tbody>
-  <% @results.each do |train| %>
+
     
     <tr class="border row-margin-05" >
       <td><%= train.train_number %></td>
       <td><%= train.train_name %></td>
       <td><%= train.source_station %></td>
       <td><%= train.destination_station%></td>  
-     <td> <%= button_to "New ticket", new_ticket_path,:method => :get,class: "btn btn-primary" %></td>
-     <td>  <%= link_to "Show this train", train %></td>
     </tr>
     <tr >
     <td> <button>Sleeper(SL) = <%= Train.find_by(train_number:"#{train.train_number}").seats.where(class_type:"SL").sum(:seat_quantity)%> </button></td>
     <td> <button>AC = <%= Train.find_by(train_number:"#{train.train_number}").seats.where(class_type:"AC").sum(:seat_quantity)%>  </button></td>
     
     </tr>
-    
-    <% end %> 
     <br>
   </tbody>
 
 </table>
-</center>
-<div>
-<%= button_to "Back to Home", root_path ,:method => :get,class: "btn btn-primary" %>
-
-</div>

@@ -1,0 +1,33 @@
+<%= form_with(model: passenger) do |form| %>
+  <% if passenger.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(passenger.errors.count, "error") %> prohibited this passenger from being saved:</h2>
+
+      <ul>
+        <% passenger.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :Full_Name, style: "display: block" %>
+    <%= form.text_field :p_name %>
+  </div>
+
+  <div>
+    <%= form.label :Age, style: "display: block" %>
+    <%= form.number_field :p_age %>
+  </div>
+
+  <div>
+    <%= form.label :Gender, style: "display: block" %>
+    <%= form.text_field :p_gender %>
+  </div>
+
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_26_123711) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_29_120118) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -50,10 +50,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_123711) do
     t.string "p_name"
     t.integer "p_age"
     t.string "p_gender"
-    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_passengers_on_user_id"
   end
 
   create_table "seats", force: :cascade do |t|
@@ -83,6 +81,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_123711) do
     t.string "to_station"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "passenger_id", null: false
+    t.string "email"
+    t.integer "mobile"
+    t.index ["passenger_id"], name: "index_tickets_on_passenger_id"
     t.index ["train_id"], name: "index_tickets_on_train_id"
     t.index ["user_id"], name: "index_tickets_on_user_id"
   end
@@ -125,8 +127,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_123711) do
 
   add_foreign_key "join_train_stations", "stations"
   add_foreign_key "join_train_stations", "trains"
-  add_foreign_key "passengers", "users"
   add_foreign_key "seats", "trains"
+  add_foreign_key "tickets", "passengers"
   add_foreign_key "tickets", "trains"
   add_foreign_key "tickets", "users"
 end
