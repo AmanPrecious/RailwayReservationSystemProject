@@ -22,8 +22,8 @@
       <td><%= train.train_name %></td>
       <td><%= train.source_station %></td>
       <td><%= train.destination_station%></td>  
-     <td> <%= button_to "New ticket", new_ticket_path,:method => :get,class: "btn btn-primary" %></td>
-     <td>  <%= link_to "Show this train", train %></td>
+     <td> <%= button_to "Book Ticket", new_ticket_path,params:{train_id:train},:method => :get,class: "btn btn-primary" %></td>
+     <td>  <%= link_to "Show Train" , train %></td>
     </tr>
     <tr >
     <td> <button>Sleeper(SL) = <%= Train.find_by(train_number:"#{train.train_number}").seats.where(class_type:"SL").sum(:seat_quantity)%> </button></td>

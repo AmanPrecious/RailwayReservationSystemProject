@@ -14,33 +14,36 @@
 <br>
 
   <div>
- 
+  <%= form.label :user_name, style: "display: block" %>
     <%= form.hidden_field :user_id %>
+    <%= form.text_field :user_name, value:current_user.first_name+" "+current_user.last_name, disabled: true %>
   </div>
 
   <div>
-  
+ 
     <%= form.hidden_field :train_id %>
   </div>
 
+    
+
   <div>
  
-    <%= form.hidden_field :booking_status %>
+    <%= form.hidden_field :booking_status ,value:'Pending'%>
   </div>
 
   <div>
-  
-    <%= form.hidden_field :booking_date %>
+  <%= form.label :booking_date, style: "display: block" %>
+    <%= form.date_field :booking_date %>
   </div>
 
   <div>
-   
-    <%= form.hidden_field :from_station %>
+  <%= form.hidden_field :from_station, style: "display: block" %>
+    <%= form.hidden_field :from_station%>
   </div>
 
   <div>
-
-    <%= form.hidden_field :to_station %>
+  <%= form.hidden_field :to_station, style: "display: block" %>
+  <%= form.hidden_field :to_station %>
   </div>
 
   <p>fill email or password for ticket update</p>
@@ -54,8 +57,29 @@
   <%= form.label :Mobile, style: "display: block" %>
   <%= form.text_field :mobile %>
 </div>
+
+<div>
+<%= form.label :Class_type, style: "display: block" %>
+<%=form.select :class_type,Seat.distinct.pluck(:class_type) %>
+</div>
+
+<div>
+<%= form.label :Seat_type, style: "display: block" %>
+<%=form.select :seat_type,Seat.distinct.pluck(:seat_type)%>
+</div>
+
+<div>
+<%= form.hidden_field :Seat_no, style: "display: block" %>
+<%= form.hidden_field :seat_no, value:1%>
+</div>
+
 <br>
   <div>
     <%= form.submit%>
   </div>
 <% end %>
+ 
+
+
+
+

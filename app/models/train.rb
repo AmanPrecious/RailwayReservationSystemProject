@@ -6,6 +6,9 @@ class Train < ApplicationRecord
     has_many :train_stations
     has_many :stations, through: :train_stations
 
-    has_many :seats
+    has_many :seats,dependent: :destroy
+    
+    has_many :tickets
+
 
 end

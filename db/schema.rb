@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_29_120118) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_30_054419) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -52,6 +52,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_29_120118) do
     t.string "p_gender"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "ticket_id", null: false
+    t.index ["ticket_id"], name: "index_passengers_on_ticket_id"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.string "payment_method"
+    t.integer "ticket_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ticket_id"], name: "index_payments_on_ticket_id"
   end
 
   create_table "seats", force: :cascade do |t|
@@ -79,12 +89,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_29_120118) do
     t.date "booking_date"
     t.string "from_station"
     t.string "to_station"
+    t.string "class_type"
+    t.string "seat_type"
+    t.string "seat_no"
+    t.integer "mobile"
+    t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "passenger_id", null: false
-    t.string "email"
-    t.integer "mobile"
-    t.index ["passenger_id"], name: "index_tickets_on_passenger_id"
     t.index ["train_id"], name: "index_tickets_on_train_id"
     t.index ["user_id"], name: "index_tickets_on_user_id"
   end
@@ -127,8 +138,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_29_120118) do
 
   add_foreign_key "join_train_stations", "stations"
   add_foreign_key "join_train_stations", "trains"
+  add_foreign_key "passengers", "tickets"
+  add_foreign_key "payments", "tickets"
   add_foreign_key "seats", "trains"
-  add_foreign_key "tickets", "passengers"
   add_foreign_key "tickets", "trains"
   add_foreign_key "tickets", "users"
 end

@@ -36,7 +36,10 @@ class Ability
       can :manage, Train
       can :manage, Seat
       can :manage, Station
-      can :read, Ticket
+      can :manage, Ticket
+      can :manage, Passenger
+      can :manage, Payment
+
     else
       can :read, Train
     end

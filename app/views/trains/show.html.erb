@@ -4,11 +4,40 @@
 
 <%= render @train %>
 
-<%= link_to "Add Passenger", new_passenger_path %>
+
 
 <div>
+<table class="table">
+  <thead>
+    <tr>
+    
+   
+      <th scope="col">Station Name</th>
+      <th scope="col">Arrival Time</th>
+      <th scope="col">Departure Time</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    
+    <tr class="border row-margin-05" >
+      <td><%=  %></td>
+      <td><%= %></td>
+      <td><%= %></td>
+    </tr>
+    <tr >
+    
+    </tr>
+    <br>
+  </tbody>
+
+</table>
+
 
 <br><br>
+
+
 <%= button_to "Back to Home", trains_path ,:method => :get,class: "btn btn-primary" %>
 
 </div>

@@ -1,6 +1,10 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Trains</h1>
+<div>
+<%= button_to "Back to Seat Availibility Status", search_path ,:method => :get,class: "btn btn-primary" %>
+
+</div>
+<center><h1>All Trains</h1></center>
 
 <div id="trains">
   <% @trains.each do |train| %>
@@ -11,4 +15,4 @@
   <% end %>
 </div>
 
-<%= link_to "New train", new_train_path %>
+

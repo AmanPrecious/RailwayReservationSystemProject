@@ -6,9 +6,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
   
-  has_many :tickets
-  has_many :passengers,through: :tickets
- 
+  has_many :tickets,dependent: :destroy
+  
   after_create :send_email,:send_email_admin
          
   def send_email  

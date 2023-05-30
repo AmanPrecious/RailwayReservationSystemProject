@@ -1,12 +1,12 @@
 <div id="<%= dom_id ticket %>">
   <p>
-    <strong>User:</strong>
-    <%= ticket.user_id %>
+    <strong>User_Name:</strong>
+    <%= (User.find(ticket.user_id).first_name) %>  <%= (User.find(ticket.user_id).last_name) %>
   </p>
 
   <p>
-    <strong>Train:</strong>
-    <%= ticket.train_id %>
+    <strong>Train_Name:</strong>
+    <%=  Train.find(ticket.train_id).train_name%>
   </p>
 
   <p>
@@ -28,5 +28,20 @@
     <strong>To station:</strong>
     <%= ticket.to_station %>
   </p>
+
+  <p>
+  <strong>Class_type:</strong>
+  <%= ticket.class_type %>
+</p>
+
+<p>
+  <strong>Seat_type:</strong>
+  <%= ticket.seat_type %>
+</p>
+
+<p>
+  <strong>Seat_no:</strong>
+  <%= ticket.seat_no %>
+</p>
 
 </div>

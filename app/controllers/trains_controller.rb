@@ -9,6 +9,8 @@ class TrainsController < ApplicationController
   # GET /trains/1 or /trains/1.json
   def show
     @train = Train.find(params[:id])
+   # @train_stop= Station.find(params[:id])
+
   end
 
   private
