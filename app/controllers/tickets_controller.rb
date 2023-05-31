@@ -1,9 +1,21 @@
 class TicketsController < InheritedResources::Base
   before_action :authenticate_user!
   
+ def index
+  @tickets=Ticket.where(user_id:current_user)
+ end
+
+
+  def show
+  @ticket =Ticket.find(params[:id])
+  end
+
+
+
 
   def new
-
+    @ticket = Ticket.new
+    @passenger=@ticket.passengers.build 
 
    @train=Train.find(params[:train_id])
    check_seat_availibity(@train)
@@ -15,18 +27,17 @@ class TicketsController < InheritedResources::Base
   end
 
   def create
-    
    @ticket = current_user.tickets.build(ticket_params)
-   check_seat_before_save(@ticket.train_id,@ticket.class_type,@ticket.seat_type)
+   #check_seat_before_save(@ticket.train_id,@ticket.class_type,@ticket.seat_type)
    set_seat_no(@ticket.train_id,@ticket.class_type,@ticket.seat_type)
-   if @ticket.save
+   if @ticket.save 
+    @passenger = Passenger.create(passenger_params.merge!(ticket:@ticket))
     update_seat_availibility(@ticket.train_id,@ticket.class_type,@ticket.seat_type)
     redirect_to @ticket
-      # Update seat availability and perform other necessary actions
-      # Handle successful ticket booking
+    #redirect_to new_ticket_payment_url(@ticket.id)
+     
     else
       render :new, status: :unprocessable_entity
-      # Handle ticket booking failure
     end
   end
 
@@ -42,16 +53,11 @@ class TicketsController < InheritedResources::Base
     train=Train.find(train_id)
     seat=train.seats.where(class_type:class_type).where(seat_type:seat_type)
     quantity=Seat.find(seat.ids.join.to_i).seat_quantity
-    if(quantity==0)
-      errors.ticket "seat not available"
-     redirect_to new_ticket_url
-    end
     @ticket.seat_no=quantity
  end
 
  #check seat availibility
   def check_seat_availibity(train)
-
     sl =train.seats.where(class_type:"SL").sum(:seat_quantity)
     ac =train.seats.where(class_type:"AC").sum(:seat_quantity)
     if(sl==0 && ac==0)
@@ -61,7 +67,7 @@ class TicketsController < InheritedResources::Base
   end
 
    #check seat availibility before save AC/SL
-   def check_seat_before_save(train_id,class_type,seat_type)
+  def check_seat_before_save(train_id,class_type,seat_type)
     train=Train.find(train_id)
     seat=train.seats.where(class_type:class_type).where(seat_type:seat_type)
     quantity=Seat.find(seat.ids.join.to_i).seat_quantity
@@ -72,12 +78,18 @@ class TicketsController < InheritedResources::Base
     
   end
 
+ 
+
   private
 
     def ticket_params
-     # params.require(:ticket).permit(:train_id, passengers_attributes: [:id, :name, :age]) # Add more passenger fields as required
-      params.require(:ticket).permit(:user_id, :train_id, :booking_status, :booking_date, :from_station, :to_station,:email , :mobile,:seat_no,:seat_type,:class_type)
+      params.require(:ticket).permit(:user_id, :train_id, :booking_status, :booking_date, :from_station, :to_station,:email ,:mobile,:seat_no,:seat_type,:class_type,passengers_attributes: [:p_name, :p_age, :p_gender])
     end
+
+    def passenger_params
+      ticket = params[:ticket]
+      ticket.require(:passenger).permit(:p_name, :p_age, :p_gender)
+    end 
 
 end
 

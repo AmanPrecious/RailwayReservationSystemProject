@@ -41,7 +41,7 @@ class Ability
       can :manage, Payment
 
     else
-      can :read, Train
+     
     end
   end
 

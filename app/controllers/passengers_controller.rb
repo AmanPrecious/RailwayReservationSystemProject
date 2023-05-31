@@ -22,6 +22,7 @@ class PassengersController < ApplicationController
   # POST /passengers or /passengers.json
   def create
     @passenger = Passenger.new(passenger_params)
+    redirect_to search_path
   
   end
 

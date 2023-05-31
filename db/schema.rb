@@ -58,6 +58,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_30_054419) do
 
   create_table "payments", force: :cascade do |t|
     t.string "payment_method"
+    t.string "payment_id"
+    t.string "payment_status"
+    t.integer "payment_amount"
     t.integer "ticket_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

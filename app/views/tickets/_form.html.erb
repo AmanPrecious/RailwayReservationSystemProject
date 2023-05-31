@@ -13,6 +13,11 @@
 
 <br>
 
+
+
+
+
+<br>
   <div>
   <%= form.label :user_name, style: "display: block" %>
     <%= form.hidden_field :user_id %>
@@ -24,7 +29,21 @@
     <%= form.hidden_field :train_id %>
   </div>
 
-    
+  Add_Passengers:
+  <ul>
+  <%= form.fields_for :passenger do |passenger_user|%>
+   
+    <li>
+    <%= form.label :Full_Name, style: "display: block" %>
+    <%= passenger_user.text_field :p_name %>
+    <%= form.label :Age, style: "display: block" %>
+    <%= passenger_user.text_field :p_age %>
+    <%= form.label :Gender, style: "display: block" %>
+    <%= passenger_user.text_field :p_gender %>
+  
+    </li>
+    <% end %>
+  </ul>
 
   <div>
  
@@ -69,8 +88,8 @@
 </div>
 
 <div>
-<%= form.hidden_field :Seat_no, style: "display: block" %>
-<%= form.hidden_field :seat_no, value:1%>
+<%= form.hidden_field :seat_no, style: "display: block" %>
+<%= form.hidden_field :seat_no, value:1 %>
 </div>
 
 <br>

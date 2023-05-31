@@ -1,0 +1,20 @@
+<h1>Payment Form</h1>
+
+<%= form_with(model: @payment) do |form| %>
+  <div>
+    <%= form.label :payment_method, style: "display: block" %>
+    <%= form.text_field :payment_method %>
+  </div>
+
+  <div>
+    <%= form.label :payment_amount, style: "display: block" %>
+    <%= form.number_field :payment_amount %>
+  </div>
+<br>
+
+  <div>
+    <%= form.submit("Pay Now")%>
+  </div>
+<% end %>
+
+
