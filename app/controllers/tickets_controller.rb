@@ -8,6 +8,7 @@ class TicketsController < InheritedResources::Base
 
   def show
   @ticket =Ticket.find(params[:id])
+  #@passenger=Passenger.find_by(ticket_id:params[:id])
   end
 
 
@@ -15,7 +16,7 @@ class TicketsController < InheritedResources::Base
 
   def new
     @ticket = Ticket.new
-    @passenger=@ticket.passengers.build 
+   @passenger=@ticket.passengers.build 
 
    @train=Train.find(params[:train_id])
    check_seat_availibity(@train)
@@ -63,20 +64,11 @@ class TicketsController < InheritedResources::Base
     if(sl==0 && ac==0)
      redirect_to search_url
     end
+
     
   end
 
-   #check seat availibility before save AC/SL
-  def check_seat_before_save(train_id,class_type,seat_type)
-    train=Train.find(train_id)
-    seat=train.seats.where(class_type:class_type).where(seat_type:seat_type)
-    quantity=Seat.find(seat.ids.join.to_i).seat_quantity
-    if(quantity==0)
-      errors.ticket "seat not available"
-     redirect_to new_ticket_url
-    end
-    
-  end
+
 
  
 
@@ -90,6 +82,8 @@ class TicketsController < InheritedResources::Base
       ticket = params[:ticket]
       ticket.require(:passenger).permit(:p_name, :p_age, :p_gender)
     end 
+
+
 
 end
 
