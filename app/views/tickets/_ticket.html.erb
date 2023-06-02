@@ -3,10 +3,16 @@
     <strong>User_Name:</strong>
     <%= (User.find(ticket.user_id).first_name) %>  <%= (User.find(ticket.user_id).last_name) %>
   </p>
+ 
+  <p>
+  <strong>Passenger_Details:</strong>
+
+  <%= render ticket.passengers %>
+</p>
 
   <p>
     <strong>Train_Name:</strong>
-    <%=  Train.find(ticket.train_id).train_name%>
+    <%= Train.find(ticket.train_id).train_name%>
   </p>
 
   <p>
@@ -43,5 +49,14 @@
   <strong>Seat_no:</strong>
   <%= ticket.seat_no %>
 </p>
+<p>
+  <strong>Mobile_no</strong>
+  <%= ticket.mobile%>
+</p>
+<p>
+  <strong>Email:</strong>
+  <%= ticket.email %>
+</p>
+
 
 </div>

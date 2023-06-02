@@ -13,10 +13,6 @@
 
 <br>
 
-
-
-
-
 <br>
   <div>
   <%= form.label :user_name, style: "display: block" %>
@@ -29,7 +25,11 @@
     <%= form.hidden_field :train_id %>
   </div>
 
-  Add_Passengers:
+
+<br>
+  Enter_Passengers_Details:
+
+
   <ul>
   <%= form.fields_for :passenger do |passenger_user|%>
    
@@ -39,12 +39,12 @@
     <%= form.label :Age, style: "display: block" %>
     <%= passenger_user.text_field :p_age %>
     <%= form.label :Gender, style: "display: block" %>
-    <%= passenger_user.text_field :p_gender %>
+    <%= passenger_user.select :p_gender, ['Male', 'Female']%>
   
     </li>
     <% end %>
   </ul>
-
+<br>
   <div>
  
     <%= form.hidden_field :booking_status ,value:'Pending'%>
@@ -94,7 +94,7 @@
 
 <br>
   <div>
-    <%= form.submit%>
+    <%= form.submit("Book Now")%>
   </div>
 <% end %>
  
