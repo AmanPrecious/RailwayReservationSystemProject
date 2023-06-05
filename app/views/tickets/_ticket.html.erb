@@ -3,52 +3,48 @@
     <strong>User_Name:</strong>
     <%= (User.find(ticket.user_id).first_name) %>  <%= (User.find(ticket.user_id).last_name) %>
   </p>
+  <p>
+    <strong>Ticket_Id:</strong>
+    <%= ticket.id %>
+  </p>
  
   <p>
-  <strong>Passenger_Details:</strong>
-
+  
   <%= render ticket.passengers %>
 </p>
 
-  <p>
-    <strong>Train_Name:</strong>
-    <%= Train.find(ticket.train_id).train_name%>
-  </p>
+<table class="table">
+<strong>Train_Details:</strong>
+  <thead>
+  
+  <tr>
+  <th scope="col">Train_Name</th>
+  <th scope="col">Booking_status</th>
+  <th scope="col">Booking_date</th>
+  <th scope="col">From_station</th>
+  <th scope="col">To_station</th>
+  <th scope="col">Class_type</th>
+  <th scope="col">Seat_type</th>
+  <th scope="col">Seat_No.</th>
+</tr>
+  </thead>
 
-  <p>
-    <strong>Booking status:</strong>
-    <%= ticket.booking_status %>
-  </p>
+  <tbody>
+    <tr class="border row-margin-05" >
+      <td>  <%= Train.find(ticket.train_id).train_name%></td>
+      <td> <%= ticket.booking_status %></td>
+      <td> <%= ticket.booking_date %></td>
+      <td>   <%= ticket.from_station %></td>
+      <td>   <%= ticket.to_station %></td>
+      <td>   <%= ticket.class_type %></td>
+      <td> <%= ticket.seat_type %></td>
+      <td>  <%= ticket.seat_no %></td>
+    </tr>
+    <br>
+  </tbody>
 
-  <p>
-    <strong>Booking date:</strong>
-    <%= ticket.booking_date %>
-  </p>
-
-  <p>
-    <strong>From station:</strong>
-    <%= ticket.from_station %>
-  </p>
-
-  <p>
-    <strong>To station:</strong>
-    <%= ticket.to_station %>
-  </p>
-
-  <p>
-  <strong>Class_type:</strong>
-  <%= ticket.class_type %>
-</p>
-
-<p>
-  <strong>Seat_type:</strong>
-  <%= ticket.seat_type %>
-</p>
-
-<p>
-  <strong>Seat_no:</strong>
-  <%= ticket.seat_no %>
-</p>
+</table>
+<strong>Contact_Details:</strong>
 <p>
   <strong>Mobile_no</strong>
   <%= ticket.mobile%>

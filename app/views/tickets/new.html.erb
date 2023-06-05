@@ -1,11 +1,13 @@
+
+<div>
+<%= render "/home/header"%>
+</div>
 <center><h1>Ticket Booking Page</h1></center>
+
 <div>
 <%= button_to "Seat Availibility", search_path ,:method => :get,class: "btn btn-primary" %>
 </div>
-
 <%= render @train %>
 <%= render "form", ticket: @ticket %>
-
-
 <br>
 

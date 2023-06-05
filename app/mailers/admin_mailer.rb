@@ -6,8 +6,11 @@ class AdminMailer < ApplicationMailer
     mail(subject: "New User Signup: #{@user.email}")
   end
 
-  def send_ticket_admin(user)
-    AdminMailer.send_ticket_admin(self).deliver_now
+  
+
+  def send_tickets_admin(user)
+  @user = user
+  mail(subject: "New Ticket Booked: #{@user.email}")
   end
 
 end

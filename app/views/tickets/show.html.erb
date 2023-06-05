@@ -1,8 +1,12 @@
 <p style="color: green"><%= notice %></p>
-
+<%= render "/home/header"%>
+<div class="border border-primary">
 <%= render @ticket %>
-<div>
-
-  <%= link_to "Back to tickets", tickets_path %>
 
 </div>
+<br>
+<div>
+<%= button_to "Back to tickets", tickets_path ,:method => :get,class: "btn btn-primary" %>
+
+</div>
+

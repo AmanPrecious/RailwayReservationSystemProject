@@ -17,7 +17,6 @@ class TicketsController < InheritedResources::Base
   def new
     @ticket = Ticket.new
    @passenger=@ticket.passengers.build 
-
    @train=Train.find(params[:train_id])
    check_seat_availibity(@train)
    @ticket = current_user.tickets.build(booking_date: Date.current,mobile:current_user.mobile,email:current_user.email,from_station:@train.source_station,to_station:@train.destination_station,seat_type:"LB",class_type:"AC")
@@ -31,14 +30,14 @@ class TicketsController < InheritedResources::Base
    @ticket = current_user.tickets.build(ticket_params)
    #check_seat_before_save(@ticket.train_id,@ticket.class_type,@ticket.seat_type)
    set_seat_no(@ticket.train_id,@ticket.class_type,@ticket.seat_type)
-   if @ticket.save 
+   if @ticket.save
     @passenger = Passenger.create(passenger_params.merge!(ticket:@ticket))
     update_seat_availibility(@ticket.train_id,@ticket.class_type,@ticket.seat_type)
     redirect_to @ticket
     #redirect_to new_ticket_payment_url(@ticket.id)
      
     else
-      render :new, status: :unprocessable_entity
+      redirect_to new_ticket_path(train_id: @ticket.train_id),notice:"Validation Failed"
     end
   end
 
@@ -47,15 +46,64 @@ class TicketsController < InheritedResources::Base
      train=Train.find(train_id)
      seat=train.seats.where(class_type:class_type).where(seat_type:seat_type)
      quantity=Seat.find(seat.ids.join.to_i).seat_quantity
+      if(quantity==0)
+       @ticket.seat_quantity=0
+      end
      seat.update(seat_quantity:quantity-1)
   end
 #set_seat_no
   def set_seat_no(train_id,class_type,seat_type)
     train=Train.find(train_id)
-    seat=train.seats.where(class_type:class_type).where(seat_type:seat_type)
-    quantity=Seat.find(seat.ids.join.to_i).seat_quantity
-    @ticket.seat_no=quantity
- end
+      
+    if(train.seats.where(class_type: class_type).where(seat_type:seat_type).first.seat_quantity!=0)
+
+      @ticket.seat_no=train.seats.where(class_type: class_type).where(seat_type:seat_type).first.seat_quantity
+      @ticket.class_type = class_type
+      @ticket.seat_type = seat_type 
+      
+    elsif(train.seats.where(class_type:"AC").where(seat_type:"LB").first.seat_quantity!=0)
+
+      @ticket.seat_no=train.seats.where(class_type:"AC").where(seat_type:"LB").first.seat_quantity
+      @ticket.class_type = "AC"
+      @ticket.seat_type = "LB" 
+
+    elsif(train.seats.where(class_type:"AC").where(seat_type:"UB").first.seat_quantity!=0)
+
+      @ticket.seat_no=train.seats.where(class_type:"AC").where(seat_type:"UB").first.seat_quantity
+      @ticket.class_type = "AC"
+      @ticket.seat_type = "UB" 
+
+    elsif(train.seats.where(class_type:"AC").where(seat_type:"MB").first.seat_quantity!=0)
+
+      @ticket.seat_no=train.seats.where(class_type:"AC").where(seat_type:"MB").first.seat_quantity
+      @ticket.class_type = "AC"
+      @ticket.seat_type = "MB" 
+
+    elsif(train.seats.where(class_type:"SL").where(seat_type:"LB").first.seat_quantity!=0)
+
+      @ticket.seat_no=train.seats.where(class_type:"SL").where(seat_type:"LB").first.seat_quantity
+      @ticket.class_type = "SL"
+      @ticket.seat_type = "LB" 
+
+    elsif(train.seats.where(class_type:"SL").where(seat_type:"MB").first.seat_quantity!=0)
+
+      @ticket.seat_no=train.seats.where(class_type:"SL").where(seat_type:"MB").first.seat_quantity
+      @ticket.class_type = "SL"
+      @ticket.seat_type = "MB" 
+
+    elsif(train.seats.where(class_type:"SL").where(seat_type:"UB").first.seat_quantity!=0)
+
+      @ticket.seat_no=train.seats.where(class_type:"SL").where(seat_type:"UB").first.seat_quantity
+      @ticket.class_type = "SL"
+      @ticket.seat_type = "UB" 
+
+    else
+      @ticket.seat_no=0
+      @ticket.class_type = class_type
+      @ticket.seat_type = seat_type 
+    end
+  end
+  
 
  #check seat availibility
   def check_seat_availibity(train)

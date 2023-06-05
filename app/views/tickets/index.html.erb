@@ -1,17 +1,24 @@
 <p style="color: green"><%= notice %></p>
-
+<%= render "/home/header"%>
 <h1>Tickets</h1>
+
 <div>
 <%= button_to "Back to Home", search_path ,:method => :get,class: "btn btn-primary" %>
 
 </div>
-<div id="tickets">
+<br>
+<div id="tickets"> 
   <% @tickets.each do |ticket| %>
+    <div class="border border-primary">
     <%= render ticket %>
 
     <p>
-      <%= link_to "Show this ticket", ticket  %>
+      
+      <%= button_to "Show this ticket", ticket ,:method => :get,class: "btn btn-primary" %>
     </p>
+    </div>
+
+    <br>
   <% end %>
 </div>
 

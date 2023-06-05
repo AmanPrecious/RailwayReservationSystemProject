@@ -16,4 +16,18 @@ ActiveAdmin.register Ticket do
    end
    
   
+   form do |f|
+    f.inputs "Ticket Details" do
+
+      f.input :train_id
+      f.input :booking_status,collection:["Pending","Confirmed","Waiting"]
+      f.input :seat_no
+      f.input :class_type, as: :select, collection: Seat.distinct.pluck(:class_type)
+      f.input :seat_type, as: :select, collection: Seat.distinct.pluck(:seat_type)
+  
+    end
+    f.actions
+  end
+
+
 end

@@ -1,17 +1,22 @@
-<div id="<%= dom_id passenger %>">
-  <p>
-    <strong>Passenger_name:</strong>
-    <%= passenger.p_name %>
-  </p>
+<table class="table">
+<strong>Passenger_Details:</strong>
+  <thead>
+  
+    <tr>
+      <th scope="col">Passenger_name</th>
+      <th scope="col">Passenger_age</th>
+      <th scope="col">Passenger_gender</th>
+    </tr>
+  </thead>
 
-  <p>
-    <strong>Passenger_age:</strong>
-    <%= passenger.p_age %>
-  </p>
+  <tbody>
+    <tr class="border row-margin-05" >
+      <td> <%= passenger.p_name %></td>
+      <td><%= passenger.p_age %></td>
+      <td> <%= passenger.p_gender %></td>
+     
+    </tr>
+    <br>
+  </tbody>
 
-  <p>
-    <strong>Passenger_gender:</strong>
-    <%= passenger.p_gender %>
-  </p>
-
-</div>
+</table>

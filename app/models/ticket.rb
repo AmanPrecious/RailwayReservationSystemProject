@@ -1,8 +1,8 @@
 class Ticket < ApplicationRecord
-  #validates :mobile,presence: true, length: { is: 10},uniqueness: true
- # validates :email,presence: true
   
-
+  validates :mobile, presence: true, length: { is: 10}
+  validates :email, presence: true
+  
   belongs_to :user
   belongs_to :train
   has_many :passengers, dependent: :destroy
@@ -10,25 +10,28 @@ class Ticket < ApplicationRecord
   has_one :payment, dependent: :destroy
 
   before_save :check_seat_before_save
-  after_save :send_ticket,:send_ticket_admin
+  after_create :send_ticket,:send_ticket_admin
+  after_update :seat_confirmed_mail
 
    #check seat availibility before save AC/SL
   def check_seat_before_save()
     seat=train.seats.where(class_type: class_type).where(seat_type:seat_type).first
-    if(seat.seat_quantity==0)
-     errors "seat not available"
+    if(seat.seat_quantity == 0)
+      errors.add(:seat_type,"Selected Seat Not Available")
     end
   end
 
   def send_ticket  
-    UserMailer.send_ticket(self).deliver_now
+    UserMailer.send_tickets(self).deliver_now
   end
 
   def send_ticket_admin
-    AdminMailer.send_ticket_admin(self).deliver_now
+    AdminMailer.send_tickets_admin(self).deliver_now
   end
 
-
+  def seat_confirmed_mail
+    UserMailer.send_seat_confirmation(self).deliver_now
+  end
 
 
 end

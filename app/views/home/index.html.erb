@@ -1,16 +1,12 @@
-<div class="container">
-<center>
-<% if user_signed_in? %> 
- <div> Welcome <%= current_user.email %> </div> 
-  <%= button_to "Sign out", destroy_user_session_path, method: :delete %> 
-<% else %>
-  <%= button_to "Sign in", new_user_session_path %> 
-<% end %>
 
+<%= render "header"%>
 <h1>Welcome To Railway Reservation System!</h1>
 
 <br>
-
+<div>
+<%= button_to "Your Tickets", tickets_url ,:method => :get,class: "btn btn-primary" %>
+</div>
+<br>
 </center>
 </div>
 
