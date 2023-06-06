@@ -15,8 +15,9 @@ class UserMailer < ApplicationMailer
   end
 
   #seat confirmation mail to user
-  def send_seat_confirmation(user)
+  def send_seat_confirmation(user,id)
      @user = user
+     @ticket = Ticket.find(id)
      mail(to:@user.email,subject: 'Your Ticket Confirmed')
   end
 end

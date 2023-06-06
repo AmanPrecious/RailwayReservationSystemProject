@@ -8,7 +8,6 @@ class TicketsController < InheritedResources::Base
 
   def show
   @ticket =Ticket.find(params[:id])
-  #@passenger=Passenger.find_by(ticket_id:params[:id])
   end
 
 
@@ -21,14 +20,11 @@ class TicketsController < InheritedResources::Base
    check_seat_availibity(@train)
    @ticket = current_user.tickets.build(booking_date: Date.current,mobile:current_user.mobile,email:current_user.email,from_station:@train.source_station,to_station:@train.destination_station,seat_type:"LB",class_type:"AC")
    @ticket.train_id=params[:train_id]
-   #@ticket.passengers.build
  
-    # Additional passenger form fields can be built dynamically using JavaScript
   end
 
   def create
    @ticket = current_user.tickets.build(ticket_params)
-   #check_seat_before_save(@ticket.train_id,@ticket.class_type,@ticket.seat_type)
    set_seat_no(@ticket.train_id,@ticket.class_type,@ticket.seat_type)
    if @ticket.save
     @passenger = Passenger.create(passenger_params.merge!(ticket:@ticket))
@@ -115,10 +111,6 @@ class TicketsController < InheritedResources::Base
 
     
   end
-
-
-
- 
 
   private
 

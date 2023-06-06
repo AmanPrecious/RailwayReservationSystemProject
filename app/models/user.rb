@@ -1,6 +1,7 @@
 class User < ApplicationRecord
 
   validates :first_name, :last_name, :mobile, :address, presence: true
+  validates :mobile, numericality: { only_integer:true }
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

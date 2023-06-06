@@ -38,7 +38,6 @@ class Ability
       can :manage, Station
       can :manage, Ticket
       can :manage, Passenger
-      can :manage, Payment
 
     else
      
