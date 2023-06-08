@@ -10,9 +10,6 @@ class TicketsController < InheritedResources::Base
   @ticket =Ticket.find(params[:id])
   end
 
-
-
-
   def new
     @ticket = Ticket.new
    @passenger=@ticket.passengers.build 
@@ -28,7 +25,9 @@ class TicketsController < InheritedResources::Base
    set_seat_no(@ticket.train_id,@ticket.class_type,@ticket.seat_type)
    if @ticket.save
     @passenger = Passenger.create(passenger_params.merge!(ticket:@ticket))
-    update_seat_availibility(@ticket.train_id,@ticket.class_type,@ticket.seat_type)
+    if @ticket.seat_no!=0
+      update_seat_availibility(@ticket.train_id,@ticket.class_type,@ticket.seat_type)
+    end
     redirect_to @ticket
     #redirect_to new_ticket_payment_url(@ticket.id)
      

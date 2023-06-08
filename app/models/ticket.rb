@@ -1,18 +1,20 @@
 class Ticket < ApplicationRecord
   
   validates :mobile, presence: true, length: { is: 10}
-  validates :email, presence: true
+  validates :email,:booking_date,:seat_type,:seat_no ,:class_type,:booking_status,:from_station,:to_station  ,presence: true
   validate :booking_date_cannot_be_in_the_past
 
   belongs_to :user
   belongs_to :train
   has_many :passengers, dependent: :destroy
   accepts_nested_attributes_for :passengers, allow_destroy: true, reject_if: :all_blank
+  validates_associated :passengers
   has_one :payment, dependent: :destroy
 
-  before_save :check_seat_before_save
+  #before_save :check_seat_before_save
   after_create :send_ticket,:send_ticket_admin
   after_update :seat_confirmed_mail
+
 
   #booking date not in past
   def booking_date_cannot_be_in_the_past

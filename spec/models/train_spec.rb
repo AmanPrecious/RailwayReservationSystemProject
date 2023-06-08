@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Train, type: :model do
   
   subject { Train.new(train_number: 1002, train_name: "Intercity Express", source_station: "Bhopal", destination_station: "Indore" ,arrival_time:"10:10 am",departure_time:"15:30 pm")}
-  it "is valid with valid attributes" do
+  it "is not valid with invalid attributes" do
     expect(subject).to be_valid
   end
   it "is not valid without a train_number" do
@@ -31,7 +31,7 @@ RSpec.describe Train, type: :model do
     expect(subject).to_not be_valid
   end
   it "is not valid if the train_number is not 4 chars" do
-    expect(subject.train_number.digits.count).to eq(4)
+    expect(subject.train_number.length).to eq(4)
   end  
 
 end

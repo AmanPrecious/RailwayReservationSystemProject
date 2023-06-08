@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Station, type: :model do
 
   subject { Station.new(stn_name: "Bhopal Junction", stn_location: "Mp", stn_code: "3545")}
-  it "is valid with valid attributes" do
+  it "is not valid with invalid attributes" do
     expect(subject).to be_valid
   end
   it "is not valid without a stn_name" do

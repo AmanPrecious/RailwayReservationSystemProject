@@ -10,10 +10,9 @@ class HomeController < ApplicationController
       if @results.blank?
         @results = Train.all
       end
-      
     end
   end
-  
+
   def search
     if params[:query].blank?
       @results = Train.all
