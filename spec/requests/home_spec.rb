@@ -18,7 +18,7 @@ RSpec.describe "Homes", type: :request do
      expect(response).to have_http_status(:ok)
     end
    it "renders 'search' template" do
-     get '/search'
+     get '/search/'
      expect(response).to render_template('search')
    end
  end

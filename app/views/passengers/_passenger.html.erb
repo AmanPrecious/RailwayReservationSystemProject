@@ -6,6 +6,11 @@
       <th scope="col">Passenger_name</th>
       <th scope="col">Passenger_age</th>
       <th scope="col">Passenger_gender</th>
+      <th scope="col">Class_type</th>
+      <th scope="col">Seat_type</th>
+      <th scope="col">Seat_no</th>
+      <th scope="col">Show Passenger_Details</th>
+     
     </tr>
   </thead>
 
@@ -14,7 +19,10 @@
       <td> <%= passenger.p_name %></td>
       <td><%= passenger.p_age %></td>
       <td> <%= passenger.p_gender %></td>
-     
+      <td> <%= passenger.class_type %></td> 
+      <td><%= passenger.seat_type %></td>
+      <td> <%= passenger.seat_no %></td>
+      <td><div><%= link_to "Show this passenger", passenger %> </div></td>
     </tr>
     <br>
   </tbody>

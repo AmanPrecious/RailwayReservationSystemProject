@@ -17,6 +17,7 @@
       <th scope="col">Train Name</th>
       <th scope="col">Source Station</th>
       <th scope="col">Destination Station</th>
+     <th scope="col">Fare</th>
       <th scope="col">Booking</th>
     </tr>
   </thead>
@@ -29,13 +30,14 @@
       <td><%= train.train_name %></td>
       <td><%= train.source_station %></td>
       <td><%= train.destination_station%></td>  
+        <td><%= train.fare%></td>  
      <td> <%= button_to "Book Ticket", new_ticket_path,params:{train_id:train},:method => :get,class: "btn btn-primary" %></td>
      <td> 
       <!--<%= link_to "Show Train" , train %></td>-->
     </tr>
     <tr >
-    <td> <button>Sleeper(SL) = <%= Train.find_by(train_number:"#{train.train_number}").seats.where(class_type:"SL").sum(:seat_quantity)%> </button></td>
-    <td> <button>AC = <%= Train.find_by(train_number:"#{train.train_number}").seats.where(class_type:"AC").sum(:seat_quantity)%>  </button></td>
+    <td> <button>Sleeper(SL) = <%= if(Train.find_by(train_number:"#{train.train_number}").seats.where(class_type:"SL").sum(:seat_quantity)==0 )then "Not Available" else Train.find_by(train_number:"#{train.train_number}").seats.where(class_type:"SL").sum(:seat_quantity) end%> </button></td>
+    <td> <button>AC = <%= if(Train.find_by(train_number:"#{train.train_number}").seats.where(class_type:"AC").sum(:seat_quantity)==0 )then "Not Available" else Train.find_by(train_number:"#{train.train_number}").seats.where(class_type:"AC").sum(:seat_quantity)end%>  </button></td>
     
     </tr>
     

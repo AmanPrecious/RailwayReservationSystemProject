@@ -1,14 +1,15 @@
 <h1>Payment Form</h1>
 
-<%= form_with(model: @payment) do |form| %>
+<%= form_with(model:[@ticket,@payment]) do |form| %>
   <div>
     <%= form.label :payment_method, style: "display: block" %>
-    <%= form.text_field :payment_method %>
+    <%= form.select :payment_method, ['DebitCard', 'UPI']%>
+
   </div>
 
   <div>
     <%= form.label :payment_amount, style: "display: block" %>
-    <%= form.number_field :payment_amount %>
+    <%= form.number_field :payment_amount, value:@fare, disabled: true %>
   </div>
 <br>
 

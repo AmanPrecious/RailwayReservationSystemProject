@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'seats/index'
+  get 'seats/show'
+  get 'seat/index'
+  get 'seat/show'
  
   #resources :payments,only: [:show, :new, :create, :index]
   resources :trains ,only:[:show,:index]

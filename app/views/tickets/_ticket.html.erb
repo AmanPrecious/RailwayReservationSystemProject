@@ -11,7 +11,9 @@
   <p>
   
   <%= render ticket.passengers %>
+
 </p>
+
 
 <table class="table">
 <strong>Train_Details:</strong>
@@ -23,9 +25,9 @@
   <th scope="col">Booking_date</th>
   <th scope="col">From_station</th>
   <th scope="col">To_station</th>
-  <th scope="col">Class_type</th>
-  <th scope="col">Seat_type</th>
-  <th scope="col">Seat_No.</th>
+  <th scope="col">Fare.</th>
+  <th scope="col">Arrival Time .</th>
+  <th scope="col">Departure Time.</th>
 </tr>
   </thead>
 
@@ -36,9 +38,9 @@
       <td> <%= ticket.booking_date %></td>
       <td>   <%= ticket.from_station %></td>
       <td>   <%= ticket.to_station %></td>
-      <td>   <%= ticket.class_type %></td>
-      <td> <%= ticket.seat_type %></td>
-      <td>  <%= ticket.seat_no %></td>
+      <td>  <%=  ticket.fare%></td>
+      <td>  <%=Train.find(ticket.train_id).arrival_time.strftime("%H:%M %P") %></td>
+      <td>  <%= Train.find(ticket.train_id).departure_time.strftime("%H:%M %P")%></td>
     </tr>
     <br>
   </tbody>
@@ -53,6 +55,4 @@
   <strong>Email:</strong>
   <%= ticket.email %>
 </p>
-
-
 </div>

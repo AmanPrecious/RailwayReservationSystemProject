@@ -7,6 +7,7 @@
       <th scope="col">Train Name</th>
       <th scope="col">Source Station</th>
       <th scope="col">Destination Station</th>
+        <th scope="col">Fare</th>
     </tr>
   </thead>
 
@@ -18,6 +19,7 @@
       <td><%= train.train_name %></td>
       <td><%= train.source_station %></td>
       <td><%= train.destination_station%></td>  
+       <td><%= train.fare%></td>  
     </tr>
     <tr >
     <td> <button>Sleeper(SL) = <%= Train.find_by(train_number:"#{train.train_number}").seats.where(class_type:"SL").sum(:seat_quantity)%> </button></td>

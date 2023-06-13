@@ -5,12 +5,12 @@ ActiveAdmin.register Train do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :train_number, :train_name, :source_station, :destination_station, :arrival_time, :departure_time
+  permit_params :train_number, :train_name, :source_station, :destination_station, :arrival_time, :departure_time,:fare
   #
   # or
   #
   permit_params do
-    permitted = [:train_number, :train_name, :source_station, :destination_station, :arrival_time, :departure_time]
+    permitted = [:train_number, :train_name, :source_station, :destination_station, :arrival_time, :departure_time,:fare]
     #permitted << :other if params[:action] == 'create' && current_user.admin?
     permitted
   end
@@ -19,6 +19,7 @@ ActiveAdmin.register Train do
     f.inputs "Train Details" do
       f.input :train_number
       f.input :train_name
+      f.input :fare
       f.input :source_station, as: :select, collection: Station.pluck(:stn_name)
       f.input :destination_station, as: :select, collection: Station.pluck(:stn_name)
       if f.object.arrival_time.present?
@@ -41,6 +42,7 @@ ActiveAdmin.register Train do
     id_column
     column :train_number
     column :train_name
+    column :fare
     column :source_station
     column :destination_station
     column :arrival_time do |object|

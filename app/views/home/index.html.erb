@@ -23,6 +23,7 @@
       <th scope="col">Train Name</th>
       <th scope="col">Source Station</th>
       <th scope="col">Destination Station</th>
+       <th scope="col">Fare</th>
       <th scope="col">Booking</th>
     </tr>
   </thead>
@@ -33,6 +34,7 @@
       <td><%= train.train_name %></td>
       <td><%= train.source_station %></td>
       <td><%= train.destination_station%></td>
+       <td><%= train.fare%></td> 
       <td><%= button_to "Book Now",new_ticket_path,params:{train_id:train},:method => :get,class: "btn btn-primary" %>
       </td> 
     </tr>

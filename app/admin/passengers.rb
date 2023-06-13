@@ -14,5 +14,19 @@ ActiveAdmin.register Passenger do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
    permitted
   end
+
+  index do
+    selectable_column
+    id_column
+    column :ticket_id
+    column :p_name
+    column :p_age
+    column :p_gender
+    column :class_type
+    column :seat_type
+    column :seat_no
+    actions
+  end
+
   
 end

@@ -19,6 +19,7 @@ ActiveAdmin.register Seat do
     f.inputs "Seat Details" do
       #f.input :train_id, as: :select, collection: Train.pluck(:train_name)
       #f.hidden_field :train_id, value: Train.find_by(train_name:"Humsafer Express").id
+      #f.input :train,collection: Train.all.map { |t| [t.train_name]}
       f.input :train_id
       f.input :class_type, as: :select, collection: Seat.distinct.pluck(:class_type)
       f.input :seat_type, as: :select, collection: Seat.distinct.pluck(:seat_type)

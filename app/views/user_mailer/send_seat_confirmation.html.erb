@@ -1,7 +1,7 @@
 <center>
 <h1>Welcome to Railway Reservation System</h1>
 <p>
-  your ticket are confirmed in railwayreservationsystem.com,
+  your ticket are confirmation status in railwayreservationsystem.com,
   your username is: <%= @user.email%>.<br>
 </p>
 <p>    
@@ -23,6 +23,10 @@ From:
 <p>    
 To:
 <%= @ticket.to_station%>
+</p>
+<p>    
+Fare:
+<%= @ticket.fare %>
 </p>
 <p>
 

@@ -1,24 +1,14 @@
-<%= form_with(model: passenger) do |form| %>
-  <% if passenger.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(passenger.errors.count, "error") %> prohibited this passenger from being saved:</h2>
+<%= form_with(model:[@ticket,@passenger]) do |form| %>
 
-      <ul>
-        <% passenger.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
 
   <div>
     <%= form.label :Full_Name, style: "display: block" %>
-    <%= form.text_field :p_name %>
+    <%= form.text_field :p_name, required: true %>
   </div>
 
   <div>
     <%= form.label :Age, style: "display: block" %>
-    <%= form.number_field :p_age %>
+    <%= form.number_field :p_age,required: true %>
   </div>
 
   <div>
@@ -26,8 +16,24 @@
     <%= form.select :p_gender, ['Male', 'Female']%>
   </div>
 
+  <div>
+  <%= form.label :Class_type, style: "display: block" %>
+  <%=form.select :class_type,Seat.distinct.pluck(:class_type) %>
+  </div>
 
   <div>
-    <%= form.submit %>
+  <%= form.label :Seat_type, style: "display: block" %>
+  <%=form.select :seat_type,Seat.distinct.pluck(:seat_type)%>
   </div>
+
+  <div>
+  <%= form.hidden_field :seat_no, style: "display: block" %>
+  <%= form.hidden_field :seat_no, value:0 %>
+  </div>
+    <br>
+    <div>
+      <%= form.submit %>
+      <%= form.submit 'Continue to Payment', name: 'continue' %>
+      <%= form.submit 'Add More Passengers', name: 'add_more' %>
+    </div>
 <% end %>

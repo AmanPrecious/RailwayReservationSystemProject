@@ -27,22 +27,23 @@
 
 
 <br>
-  Enter_Passengers_Details:
+  
   <ul>
-  <%= form.fields_for :passenger do |passenger_user|%>
+  <%#= form.fields_for :passenger do |passenger_user|%>
    
     <li>
-    <%= form.label :Full_Name, style: "display: block" %>
-    <%= passenger_user.text_field :p_name %>
-    <%= form.label :Age, style: "display: block" %>
-    <%= passenger_user.text_field :p_age %>
-    <%= form.label :Gender, style: "display: block" %>
-    <%= passenger_user.select :p_gender, ['Male', 'Female']%>
+    <%#=  form.label :Full_Name, style: "display: block" %>
+    <%#= passenger_user.text_field :p_name %>
+    <%#= form.label :Age, style: "display: block" %>
+    <%#= passenger_user.text_field :p_age %>
+    <%#= form.label :Gender, style: "display: block" %>
+    <%#= passenger_user.select :p_gender, ['Male', 'Female']%>
   
     </li>
-    <% end %>
+    <%# end %>
   </ul>
 <br>
+
   <div>
  
     <%= form.hidden_field :booking_status ,value:'Pending'%>
@@ -51,6 +52,11 @@
   <div>
   <%= form.label :booking_date, style: "display: block" %>
     <%= form.date_field :booking_date %>
+  </div>
+
+<div>
+  <%= form.hidden_field :fare, style: "display: block" %>
+    <%= form.hidden_field :fare%>
   </div>
 
   <div>
@@ -75,24 +81,9 @@
   <%= form.text_field :mobile %>
 </div>
 
-<div>
-<%= form.label :Class_type, style: "display: block" %>
-<%=form.select :class_type,Seat.distinct.pluck(:class_type) %>
-</div>
-
-<div>
-<%= form.label :Seat_type, style: "display: block" %>
-<%=form.select :seat_type,Seat.distinct.pluck(:seat_type)%>
-</div>
-
-<div>
-<%= form.hidden_field :seat_no, style: "display: block" %>
-<%= form.hidden_field :seat_no, value:1 %>
-</div>
-
 <br>
   <div>
-    <%= form.submit("Book Now")%>
+    <%= form.submit("Add Passengers Details")%>
   </div>
 <% end %>
  

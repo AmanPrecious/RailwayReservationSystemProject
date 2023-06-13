@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_08_120022) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_12_131115) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -53,12 +53,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_08_120022) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "ticket_id", null: false
+    t.string "class_type"
+    t.string "seat_type"
+    t.string "seat_no"
+    t.integer "seat_id"
+    t.index ["seat_id"], name: "index_passengers_on_seat_id"
     t.index ["ticket_id"], name: "index_passengers_on_ticket_id"
   end
 
   create_table "payments", force: :cascade do |t|
     t.string "payment_method"
-    t.string "payment_id"
     t.string "payment_status"
     t.integer "payment_amount"
     t.integer "ticket_id", null: false
@@ -92,13 +96,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_08_120022) do
     t.date "booking_date"
     t.string "from_station"
     t.string "to_station"
-    t.string "class_type"
-    t.string "seat_type"
-    t.string "seat_no"
     t.integer "mobile"
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "fare"
     t.index ["train_id"], name: "index_tickets_on_train_id"
     t.index ["user_id"], name: "index_tickets_on_user_id"
   end
@@ -117,6 +119,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_08_120022) do
     t.datetime "departure_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "fare"
   end
 
   create_table "users", force: :cascade do |t|
@@ -141,6 +144,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_08_120022) do
 
   add_foreign_key "join_train_stations", "stations"
   add_foreign_key "join_train_stations", "trains"
+  add_foreign_key "passengers", "seats"
   add_foreign_key "passengers", "tickets"
   add_foreign_key "payments", "tickets"
   add_foreign_key "seats", "trains"

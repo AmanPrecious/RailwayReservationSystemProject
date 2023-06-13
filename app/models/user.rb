@@ -7,7 +7,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
   
-  has_many :tickets,dependent: :destroy
+  has_many :tickets, dependent: :destroy
   
   after_create :send_email,:send_email_admin
          
