@@ -9,8 +9,9 @@
       <th scope="col">Class_type</th>
       <th scope="col">Seat_type</th>
       <th scope="col">Seat_no</th>
-      <th scope="col">Show Passenger_Details</th>
-     
+      <% if passenger.ticket.payment.blank? %>
+         <th scope="col">Show Passenger_Details</th>
+      <%end%>
     </tr>
   </thead>
 
@@ -22,7 +23,11 @@
       <td> <%= passenger.class_type %></td> 
       <td><%= passenger.seat_type %></td>
       <td> <%= passenger.seat_no %></td>
-      <td><div><%= link_to "Show this passenger", passenger %> </div></td>
+
+      <% if passenger.ticket.payment.blank? %>
+          <td><div><%= link_to "Show this passenger", passenger %> </div></td>
+       <%end%>
+
     </tr>
     <br>
   </tbody>

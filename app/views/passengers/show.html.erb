@@ -1,10 +1,10 @@
 <center>
 <h1>Edit and Remove Passenger Details</h1>
 </center>
-<%= render "passenger", passenger: @passenger %>
+ <%= render "passenger", passenger: @passenger %>
  <%= link_to "Edit this passenger", edit_passenger_path(@passenger) %>
  <br>
- <%= link_to "Destroy", passenger_path(@passenger),data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+ <%= button_to "Destroy", passenger_path(@passenger),method: :delete%>
   <br>
-<%= link_to "Cancle",new_ticket_passenger_path(@passenger.ticket_id) %>
+ <%= link_to "Cancle",new_ticket_passenger_path(@passenger.ticket_id) %>
  <br>

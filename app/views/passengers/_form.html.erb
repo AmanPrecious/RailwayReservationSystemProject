@@ -32,8 +32,12 @@
   </div>
     <br>
     <div>
-      <%= form.submit %>
-      <%= form.submit 'Continue to Payment', name: 'continue' %>
-      <%= form.submit 'Add More Passengers', name: 'add_more' %>
+     
+   <% if controller_name == 'passengers' && action_name == 'edit' %>
+     <%= form.submit %>
+   <%else%>
+       <%= form.submit 'Continue to Payment', name: 'continue' %>
+       <%= form.submit 'Add More Passengers', name: 'add_more' %>
+   <%end%>
     </div>
 <% end %>
