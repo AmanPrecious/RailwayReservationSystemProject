@@ -2,7 +2,8 @@ class TicketsController < InheritedResources::Base
   before_action :authenticate_user!
   
  def index
-   @tickets=Ticket.where(user_id:current_user)
+   @tickets = Ticket.where(user_id:current_user).page(params[:page]).per(3)
+   #@tickets = Ticket.where(user_id:current_user)
  end
 
 

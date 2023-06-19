@@ -33,7 +33,6 @@ class PassengersController < ApplicationController
   end
 
   def destroy
-    
     @passenger = Passenger.find(params[:id])
     @ticket = Ticket.find(@passenger.ticket_id)
     @passenger.destroy
@@ -43,18 +42,15 @@ class PassengersController < ApplicationController
   def create
     @ticket = Ticket.find(params[:ticket_id])
     @passenger = Passenger.new(passenger_params.merge!(ticket:@ticket))
-    #set_seat_no(@ticket.train_id,@passenger.class_type,@passenger.seat_type)
    
     if params[:continue].present?
       if @passenger.save
-       #update_seat_availibility(@ticket.train_id,@passenger.class_type,@passenger.seat_type)
         redirect_to new_ticket_payment_url(@ticket.id)
       else
        redirect_to new_ticket_passenger_path(@ticket.id),notice:"Passenger Name Already Registered"
        end
     elsif params[:add_more].present?
       if @passenger.save
-        #update_seat_availibility(@ticket.train_id,@passenger.class_type,@passenger.seat_type)
         # Redirect to the same page to add more passengers
         redirect_to new_ticket_passenger_path(@ticket.id),notice:"Successfully Add passenger"
       else
@@ -62,7 +58,6 @@ class PassengersController < ApplicationController
       end
     else
       if @passenger.save
-        #update_seat_availibility(@ticket.train_id,@passenger.class_type,@passenger.seat_type)
         redirect_to new_ticket_passenger_path(@ticket.id)
       else
        redirect_to new_ticket_passenger_path(@ticket.id),notice:"Passenger Name Already Registered"

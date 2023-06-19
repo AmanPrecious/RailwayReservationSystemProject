@@ -22,8 +22,8 @@
        <td><%= train.fare%></td>  
     </tr>
     <tr >
-    <td> <button>Sleeper(SL) = <%= Train.find_by(train_number:"#{train.train_number}").seats.where(class_type:"SL").sum(:seat_quantity)%> </button></td>
-    <td> <button>AC = <%= Train.find_by(train_number:"#{train.train_number}").seats.where(class_type:"AC").sum(:seat_quantity)%>  </button></td>
+    <td> <button>Sleeper(SL) = <%= if(Train.find_by(train_number:"#{train.train_number}").seats.where(class_type:"SL").sum(:seat_quantity)==0 )then "Not Available" else Train.find_by(train_number:"#{train.train_number}").seats.where(class_type:"SL").sum(:seat_quantity) end%> </button></td>
+    <td> <button>AC = <%= if(Train.find_by(train_number:"#{train.train_number}").seats.where(class_type:"AC").sum(:seat_quantity)==0 )then "Not Available" else Train.find_by(train_number:"#{train.train_number}").seats.where(class_type:"AC").sum(:seat_quantity)end%>  </button></td>
     
     </tr>
     <br>

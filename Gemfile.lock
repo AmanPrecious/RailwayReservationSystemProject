@@ -342,6 +342,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   jquery-rails
+  kaminari
   letter_opener
   puma (~> 5.0)
   rails (~> 7.0.4, >= 7.0.4.3)
